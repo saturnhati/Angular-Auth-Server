@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Post } from '../models/post';
-import { PostsService } from '../posts.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
+import { Post } from "../models/post";
+import { PostsService } from "./posts.service";
 
 @Component({
   template: `
@@ -11,9 +11,9 @@ import { PostsService } from '../posts.service';
         <h1 class="text-center mt-4 mb-3">
           {{ post.title }}
         </h1>
-        <p>{{post.body}}</p>
-        <p>Categoria: {{post.type}}</p>
-        <p>Autore: {{post.author}}</p>
+        <p>{{ post.body }}</p>
+        <p>Categoria: {{ post.type }}</p>
+        <p>Autore: {{ post.author }}</p>
       </ng-container>
     </div>
     <ng-template #elseTemplate>
@@ -29,9 +29,9 @@ export class PostDetailsPage implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.router.params.subscribe((params) => {
-      const id = +params['id'];
+      const id = +params["id"];
       console.log(id);
-      this.post = this.postsSrv.getPost(id);
+      this.postsSrv.getPost(id).subscribe((data) => (this.post = data));
     });
   }
 
